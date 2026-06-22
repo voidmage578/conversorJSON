@@ -107,7 +107,7 @@ npm run tauri build
 
 | Format | Extension |
 |---|---|
-| Excel | `.xlsx` |
+| Excel | `.xls`,`.xlsx` |
 | CSV | `.csv` |
 
 ---
