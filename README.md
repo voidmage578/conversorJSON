@@ -1,120 +1,117 @@
 # 📄 ConversorJSON
 
-Uma aplicação desktop leve para converter ficheiros **Excel (.xlsx)** e **CSV** em ficheiros **JSON** limpos e estruturados.
+A lightweight desktop application for converting **Excel (.xlsx)** and **CSV** files into clean, validated and structured **JSON**.  
+Built with **Tauri v2**, combining Rust performance with a modern React-based interface.
 
-> ⬇️ [Download da última versão (v0.9)](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9)
+> ⬇️ [Download latest version (v0.9)](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9)
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Features
 
-- **Carregamento de ficheiros** — drag-and-drop ou diálogo nativo
-- **Inferência automática de tipos** — texto, número, booleano e data
-- **Mapeamento de colunas** — configura o nome, tipo e estratégia para células vazias de cada coluna
-- **Estratégias para células vazias** — Omitir, Nulo ou Valor por defeito
-- **Validação** — modo Strict (para ao primeiro erro) ou Tolerant (recolhe todos os erros)
-- **Preview de dados** — tabela de pré-visualização antes de exportar
-- **Exportação JSON** — ficheiro pretty-printed guardado via diálogo nativo
+- **File loading** — drag‑and‑drop or native file dialog
+- **Automatic type inference** — text, number, boolean, date
+- **Column mapping** — rename fields, set types and empty‑cell strategies
+- **Empty‑cell strategies** — Omit · Null · Default value
+- **Data validation**
+  - **Strict Mode** — stops at the first error and allows re‑uploading a corrected file
+  - **Tolerant Mode** — scans the entire file and generates a full error report
+- **Data preview** — interactive table before exporting
+- **JSON export** — pretty‑printed output saved via native dialog
 
 ---
 
 ## 🚀 Pipeline
 
 ```
-Carregamento → Mapeamento & Regras → Validação → Exportação
+Load → Mapping & Rules → Validation → Export
 ```
 
-| Fase | Descrição |
-|---|---|
-| **Carregamento** | Ingestão do ficheiro Excel ou CSV |
-| **Mapeamento & Regras** | Configuração por coluna (tipo, nome, células vazias) |
-| **Validação** | Verificação de dados em modo Strict ou Tolerant |
-| **Exportação** | Geração do JSON final |
+| Stage | Description |
+|-------|-------------|
+| **Load** | Reads the Excel or CSV file |
+| **Mapping & Rules** | Per‑column configuration (type, name, empty‑cell strategy) |
+| **Validation** | Strict (interrupts) or Tolerant (full report) |
+| **Export** | Generates the final JSON |
 
 ---
 
-## 🛠️ Stack Técnica
+## 🛠️ Tech Stack
 
 ### Framework
-| Tecnologia | Função |
-|---|---|
-| [Tauri v2](https://tauri.app/) | Shell nativa (Rust + WebView); diálogos e acesso ao sistema de ficheiros |
-| [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | Interface e gestão de estado |
-| [Tailwind CSS](https://tailwindcss.com/) | Estilização |
+| Technology | Purpose |
+|------------|----------|
+| **Tauri v2** | Native shell (Rust + WebView); dialogs and filesystem access |
+| **React + TypeScript** | UI and state management |
+| **Tailwind CSS** | Styling |
 
 ### Frontend
-| Biblioteca | Função |
-|---|---|
-| [SheetJS (`xlsx`)](https://sheetjs.com/) | Parsing de ficheiros Excel no browser |
-| [PapaParse](https://www.papaparse.com/) | Parsing de ficheiros CSV |
+| Library | Purpose |
+|---------|----------|
+| **SheetJS (`xlsx`)** | Excel parsing in the browser |
+| **PapaParse** | CSV parsing |
 
 ### Backend (Rust)
-| Crate | Função |
-|---|---|
-| [`calamine`](https://crates.io/crates/calamine) | Leitura de Excel (headers + sample rows, memory-safe) |
-| [`csv`](https://crates.io/crates/csv) | Leitura de CSV em streaming |
-| [`serde` / `serde_json`](https://serde.rs/) | Serialização entre Rust e TypeScript |
-| [`chrono`](https://crates.io/crates/chrono) | Parsing de datas (europeu, ISO 8601, serial Excel) |
+| Crate | Purpose |
+|--------|---------|
+| **calamine** | Excel reading (headers + sample rows) |
+| **csv** | Streaming CSV reader |
+| **serde / serde_json** | Serialization between Rust and TypeScript |
+| **chrono** | Date parsing (EU, ISO 8601, Excel serial) |
 
 ---
 
-## 🏗️ Arquitetura
+## 🏗️ Architecture
 
-O Rust trata de todo o processamento pesado; o React gere a configuração e a visualização.
+Rust handles all heavy processing; React manages configuration and UI.
 
 ```
 ┌─────────────────────────────────────┐
 │           React / TypeScript        │
-│  Configuração · Preview · Erros UI  │
+│   Mapping · Preview · Error UI      │
 └──────────────┬──────────────────────┘
                │ Tauri Commands
 ┌──────────────▼──────────────────────┐
 │              Rust / Tauri           │
-│  Leitura · Validação · Exportação   │
+│  Reading · Validation · Export      │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 📦 Instalação
+## 📦 Installation
 
-Descarrega o instalador para o teu sistema operativo na página de [Releases](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9).
+Download the installer for your OS from the [Releases](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9) page.
 
-> **Nota:** Em Windows com Smart App Control ativo, poderá ser necessário confirmar a execução do instalador manualmente.
+> ⚠️ **Note:** On Windows with Smart App Control enabled, you may need to manually confirm the installer.
 
 ---
 
-## 🧑‍💻 Desenvolvimento local
+## 🧑‍💻 Local Development
 
-### Pré-requisitos
+### Requirements
+- Node.js + npm  
+- Rust + Build Tools (Windows: Visual Studio C++ Build Tools)
 
-- [Node.js](https://nodejs.org/) + npm
-- [Rust](https://www.rust-lang.org/tools/install) + Build Tools (Windows: Visual Studio C++ Build Tools)
-
-### Instalar e correr
+### Install & run
 
 ```bash
-# Instalar dependências frontend
 npm install
-
-# Correr em modo desenvolvimento
 npm run tauri dev
-
-# Compilar para produção
 npm run tauri build
 ```
 
 ---
 
-## 📋 Formatos suportados
+## 📋 Supported Formats
 
-| Formato | Extensão |
+| Format | Extension |
 |---|---|
 | Excel | `.xlsx` |
 | CSV | `.csv` |
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está disponível sob a licença [MIT](LICENSE).
+This project is available under the [MIT](LICENSE).
