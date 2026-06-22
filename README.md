@@ -96,7 +96,7 @@ Responsabilidades:
 
 ## 📦 Download
 
-👉 **[Download da versão mais recente]([#](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9))**
+👉 **[Download da versão mais recente](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9)**
 
 ---
 
