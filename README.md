@@ -1,6 +1,6 @@
 # 📄 ConversorJSON
 
-A lightweight desktop application for converting **Excel (.xlsx)** and **CSV** files into clean, validated and structured **JSON**.  
+A lightweight desktop application for converting **Excel (.xls, .xlsx)** and **CSV** files into clean, validated and structured **JSON**.  
 Built with **Tauri v2**, combining Rust performance with a modern React-based interface.
 
 > ⬇️ [Download latest version (v0.9)](https://github.com/voidmage578/conversorJSON/releases/tag/v0.9)
